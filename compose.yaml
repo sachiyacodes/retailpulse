@@ -1,0 +1,25 @@
+services:
+  dashboard:
+    profiles: ["dashboard"]
+    build: .
+    image: retailpulse:local
+    ports:
+      - "127.0.0.1:8501:8501"
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: retailpulse
+      POSTGRES_USER: retailpulse
+      # Local development only. Never reuse this password on a shared server.
+      POSTGRES_PASSWORD: retailpulse_local
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U retailpulse -d retailpulse"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  postgres_data:

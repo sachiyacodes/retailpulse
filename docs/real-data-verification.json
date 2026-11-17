@@ -1,0 +1,135 @@
+{
+  "postgres_version": "PostgreSQL 18.6 on x86_64-windows, compiled by msvc-19.44.35228, 64-bit",
+  "sql_kpis": {
+    "sales_lines": 522504,
+    "orders": 19773,
+    "known_customers": 4334,
+    "units": 5561280,
+    "revenue": "10246820.87"
+  },
+  "executed_views": [
+    "cohort_retention",
+    "country_performance",
+    "customer_performance",
+    "customer_rfm",
+    "daily_sales",
+    "hourly_sales",
+    "kpis",
+    "monthly_growth",
+    "monthly_sales",
+    "product_abc",
+    "product_performance",
+    "repeat_customer_rate",
+    "sales_trend",
+    "weekday_sales"
+  ],
+  "reconciliation": "Exact Decimal revenue, rows, orders, known customers, units match cleaned CSV",
+  "manifest": {
+    "source": "external",
+    "currency": "GBP",
+    "seed": null,
+    "input_sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+    "transactions_sha256": "6099451960cb510cab9ec29f19d39b76571733b345919a3aa700c69323d04393",
+    "date_start": "2010-12-01 08:26:00",
+    "date_end": "2011-12-09 12:50:00",
+    "metric_scope": "positive merchandise sales; exclusions are not netted against revenue"
+  },
+  "quality_report": {
+    "input_rows": 541909,
+    "excluded": {
+      "exact_duplicates": 5268,
+      "missing_identifiers_or_date": 0,
+      "cancellations": 9251,
+      "invalid_quantity": 1336,
+      "invalid_price": 1176,
+      "non_merchandise_codes": 2374,
+      "price_rounds_to_zero": 0,
+      "line_revenue_over_limit": 0
+    },
+    "output_rows": 522504,
+    "anonymous_rows": 131354,
+    "gross_revenue": 10246820.87
+  },
+  "forecast_metrics": {
+    "selected_model": "weekday_mean",
+    "horizon_days": 14,
+    "selection": "lowest mean MAE across 3 expanding-window folds before final holdout",
+    "folds": [
+      {
+        "model": "seasonal_naive",
+        "fold": 1,
+        "train_end": "2011-10-14",
+        "test_start": "2011-10-15",
+        "test_end": "2011-10-28",
+        "mae": 8067.857857142856,
+        "rmse": 11727.658549160918,
+        "wape": 0.22823982052006134
+      },
+      {
+        "model": "seasonal_naive",
+        "fold": 2,
+        "train_end": "2011-10-28",
+        "test_start": "2011-10-29",
+        "test_end": "2011-11-11",
+        "mae": 16582.742142857143,
+        "rmse": 19835.76467691179,
+        "wape": 0.3562245508698585
+      },
+      {
+        "model": "seasonal_naive",
+        "fold": 3,
+        "train_end": "2011-11-11",
+        "test_start": "2011-11-12",
+        "test_end": "2011-11-25",
+        "mae": 10346.065000000002,
+        "rmse": 14427.987077376734,
+        "wape": 0.21054236091822026
+      },
+      {
+        "model": "weekday_mean",
+        "fold": 1,
+        "train_end": "2011-10-14",
+        "test_start": "2011-10-15",
+        "test_end": "2011-10-28",
+        "mae": 7306.282499999999,
+        "rmse": 10123.820899151564,
+        "wape": 0.20669484217455236
+      },
+      {
+        "model": "weekday_mean",
+        "fold": 2,
+        "train_end": "2011-10-28",
+        "test_start": "2011-10-29",
+        "test_end": "2011-11-11",
+        "mae": 14590.95875,
+        "rmse": 18242.54649497424,
+        "wape": 0.3134377705871898
+      },
+      {
+        "model": "weekday_mean",
+        "fold": 3,
+        "train_end": "2011-11-11",
+        "test_start": "2011-11-12",
+        "test_end": "2011-11-25",
+        "mae": 11304.707321428572,
+        "rmse": 19073.929060630016,
+        "wape": 0.23005072643010271
+      }
+    ],
+    "holdout_start": "2011-11-26",
+    "holdout_end": "2011-12-09",
+    "holdout": {
+      "seasonal_naive": {
+        "mae": 20412.042857142857,
+        "rmse": 42701.154589829464,
+        "wape": 0.3513361202176615
+      },
+      "weekday_mean": {
+        "mae": 18629.450178571427,
+        "rmse": 41086.6579248461,
+        "wape": 0.32065378234482406
+      }
+    },
+    "limitations": "Point forecasts only; no calibrated uncertainty. Zero-filled missing dates assume no sales."
+  }
+}
