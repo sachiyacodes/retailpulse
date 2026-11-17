@@ -20,8 +20,8 @@ jobs:
     env:
       DATABASE_URL: postgresql://retailpulse:ci_only_password@localhost:5432/retailpulse_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -32,7 +32,7 @@ jobs:
       - run: pytest -q
       - run: python -m retailpulse.pipeline
       - run: python -m retailpulse.database
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: reproducible-demo
           path: data/processed/
