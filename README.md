@@ -14,7 +14,7 @@ RetailPulse turns transaction lines into answers about sales, products, customer
 - Unit tests, Streamlit app checks, optional live PostgreSQL tests, and GitHub Actions CI.
 - Beginner setup, data dictionary, architecture, forecasting explanation, SQL and Power BI guides.
 
-**Verification status:** read [docs/verification.md](docs/verification.md) for executed checks and publication evidence. A supplied CI workflow is not evidence of a GitHub run. No native Power BI `.pbix` is supplied or verified. Real-data results are only verified if the verification report explicitly records that run. The bundled default demo is synthetic.
+**Verification status:** [hosted CI passed](https://github.com/sachiyacodes/retailpulse/actions/runs/44109069269) for the first published source commit, including disposable PostgreSQL, SQL loading, Docker build, and container health. Read [docs/verification.md](docs/verification.md) for scoped evidence. No native Power BI `.pbix` is supplied or verified. Real-data results are only verified if the verification report explicitly records that run. The bundled default demo is synthetic.
 
 ![RetailPulse dashboard using synthetic demonstration data](docs/dashboard-desktop.png)
 

@@ -29,7 +29,7 @@ The bundled CSS is included in Python package data. The supported Streamlit mini
 
 Follow-up preparation adds a non-root dashboard Dockerfile, optional dashboard Compose profile, manual CI trigger and container smoke checks. Power BI Desktop was found installed and opened, but no report was created or saved. Interactive setup stopped at the user's request. See [deployment.md](deployment.md) for the remaining manual steps.
 
-The GitHub Actions workflow uses PostgreSQL 16 on Linux. It is supplied but has **not run on GitHub** as part of this delivery. Docker Compose itself was not executed: Docker is absent on the verification machine. Local database checks used temporary PostgreSQL binaries, which are not bundled in the repository. No separate static type checker is configured; compilation, lint and runtime tests are the executed code checks.
+The original delivery supplied a PostgreSQL 16/Linux workflow but did not execute it on GitHub at that time. Fresh publication evidence appears below. Docker Compose itself was not executed: Docker is absent on the verification machine. Local database checks used temporary PostgreSQL binaries, which are not bundled in the repository. No separate static type checker is configured; compilation, lint and runtime tests are the executed code checks.
 
 ## Real-data evidence
 
@@ -69,7 +69,7 @@ These are baseline results, not production forecasting claims. The source ends a
 - **No native Power BI PBIX exists.** DAX, model instructions and a report specification are supplied; Desktop import, measures, visuals and refresh remain unverified.
 - No private retailer feeds, cost records, inventory balances, live scheduling or production deployment were integrated.
 - No profit, net-return accounting, stock availability or replenishment recommendation is claimed.
-- GitHub publication and hosted dashboard deployment were not performed.
+- The original delivery had no GitHub publication or hosted dashboard. The source repository is now published; no hosted Streamlit service is claimed.
 
 
 ## Publication maintenance
@@ -77,3 +77,9 @@ These are baseline results, not production forecasting claims. The source ends a
 The source publication is prepared from an isolated copy; the original working project and generated datasets are preserved. Raw UCI/customer-level data, generated outputs, environments, and credentials are excluded. The lockfile already pins pytest 9.2.0; the development constraint now also excludes vulnerable older test tooling. Fresh local checks and hosted PostgreSQL/container checks are recorded separately before a source milestone is published. No Power BI report, hosted Streamlit service, PyPI package, or container registry publication is implied.
 
 Prepublication checks on November 17, 2026 passed on Python 3.12.10: 22 tests, Ruff, compilation, dependency consistency, and the documented synthetic pipeline (10,738 rows; GBP 392,016.00). One local PostgreSQL integration test skipped because no local database tool is installed. OSV returned zero matches for all 45 locked dependency versions. Fresh hosted CI must supply PostgreSQL and verify all 23 tests, SQL reloads, and the container before release.
+
+## Published source verification — November 17, 2026
+
+Repository: [sachiyacodes/retailpulse](https://github.com/sachiyacodes/retailpulse). The first published commit `8964fc9ddfa8689c9a4dff58ab24ce81689e87ea` passed [hosted CI run 44109069269](https://github.com/sachiyacodes/retailpulse/actions/runs/44109069269). The fresh job initialized disposable PostgreSQL 16, ran the full test suite with DATABASE_URL set, executed the synthetic pipeline and SQL loader, built the dashboard container, checked HTTP health, and stopped its containers. Every step passed. The integration test exercises snapshot reloads, all 14 views, constraints, and failed-load rollback. This fills the local database/tooling gap without using a real database.
+
+The source release is gated again on successful CI for its final documentation commit. The source-only scope and all explicitly absent items above remain unchanged.
